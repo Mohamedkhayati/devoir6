@@ -1,0 +1,38 @@
+<div class="container">
+
+<div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+  <label>Nutritionals </label>
+  <select class="form-control form-control-lg" id="idNut" name="idNut"
+  [(ngModel)]="IdNutritional" (change)="onChange()">
+  
+  <option *ngFor="let nut of nutritionals" value="{{nut.idNut}}">
+  {{nut.nomNut}}
+  </option>
+  </select>
+  </div>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <table class="table table-striped">
+  
+          <thead>
+            <tr> <th>Id</th><th>Nom</th> <th>Prix</th><th>Dosage</th> <th>Date Création</th><th>Catégorie</th> </tr>
+          </thead>
+          <tbody *ngFor="let supplement of supplements">
+            <tr>
+              <td>{{supplement.idSupplement}}</td>
+              <td>{{supplement.nomSupplement}}</td>
+              <td>{{supplement.prixSupplement}}</td>
+              <td>{{supplement.dosageSupplement}}</td>
+              <td>{{supplement.dateCreation | date:'dd/MM/yyyy'}}</td>
+              <td>{{supplement.nutritional.nomNut}}</td>
+              <td><a class="btn btn-danger" (click)="supprimerSupplement(supplement)">Supprimer</a></td>
+              <td><a class="btn btn-success" [routerLink]="['/updateSupplement',supplement.idSupplement]">Modifier</a></td>
+  
+  
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

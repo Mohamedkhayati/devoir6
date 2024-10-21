@@ -1,0 +1,77 @@
+<div class="container">
+  <div>
+    <h2>Ajouter un Supplément :</h2>
+  </div>
+  <form [formGroup]="addSupplementForm" (ngSubmit)="addSupplement()">
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <label>ID Supplément</label>
+        <input type="text" formControlName="IdSupplement" class="form-control" required />
+        <div *ngIf="addSupplementForm.get('IdSupplement')?.errors?.['required']" class="text-danger">
+          Le ID du supplément est obligatoire.
+        </div>
+        <div *ngIf="addSupplementForm.get('IdSupplement')?.errors?.['minlength']" class="text-danger">
+          Le ID doit contenir au moins 1 caractères.
+        </div>
+      </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Supplément</label>
+      <input type="text" formControlName="nomSupplement" class="form-control" required />
+      <div *ngIf="addSupplementForm.get('nomSupplement')?.errors?.['required']" class="text-danger">
+        Le nom du supplément est obligatoire.
+      </div>
+      <div *ngIf="addSupplementForm.get('nomSupplement')?.errors?.['minlength']" class="text-danger">
+        Le nom doit contenir au moins 3 caractères.
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Email</label>
+      <input type="email" formControlName="email" class="form-control" required />
+      <div *ngIf="addSupplementForm.get('email')?.errors?.['invalidEmail']" class="text-danger">
+        L'email doit contenir '&#64;' et se terminer par '.com'.
+      </div>
+      <div *ngIf="addSupplementForm.get('email')?.errors?.['required']" class="text-danger">
+        L'email est obligatoire.
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Prix Supplément</label>
+      <input type="number" formControlName="prixSupplement" class="form-control" required />
+      <div *ngIf="addSupplementForm.get('prixSupplement')?.errors?.['required']" class="text-danger">
+        Le prix est obligatoire.
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Dosage Supplément</label>
+      <input type="text" formControlName="dosageSupplement" class="form-control" required />
+      <div *ngIf="addSupplementForm.get('dosageSupplement')?.errors?.['required']" class="text-danger">
+        Le dosage est obligatoire.
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date Création</label>
+      <input type="date" formControlName="dateCreation" class="form-control" required />
+      <div *ngIf="addSupplementForm.get('dateCreation')?.errors?.['required']" class="text-danger">
+        La date de création est obligatoire.
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Categorie Nutritionnelle</label>
+      <select class="form-control" formControlName="idNut">
+        <option value="">Sélectionner une catégorie</option>
+        <option *ngFor="let nut of nutritionals" [value]="nut.idNut">{{ nut.nomNut }}</option>
+      </select>
+      <div *ngIf="addSupplementForm.get('idNut')?.errors?.['required']" class="text-danger">
+        La catégorie nutritionnelle est obligatoire.
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <button type="submit" class="btn btn-success">Ajouter</button>
+    </div>
+  </form>
+</div>

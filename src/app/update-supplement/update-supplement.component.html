@@ -1,0 +1,61 @@
+<div class="container">
+    <div>
+      <h2>Modifier un Supplement :</h2>
+    </div>
+    <form (ngSubmit)="updateSupplement()" #updateSupplementForm="ngForm">
+  
+      <div class="col-sm-2 col-md-2 col-lg-2">
+        <label>ID Supplement</label>
+        <input type="text" [(ngModel)]="currentSupplement.idSupplement"
+        name="idSupplement" class="form-control" required />
+      </div>
+  
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <label>Nom Supplement</label>
+        <input type="text" [(ngModel)]="currentSupplement.nomSupplement"
+        name="nomSupplement" class="form-control" required minlength="3" />
+        <div *ngIf="updateSupplementForm.submitted && !updateSupplementForm.form.controls['nomSupplement']?.valid" class="text-danger">
+          Le nom doit comporter au moins 3 caractères.
+        </div>
+      </div>
+  
+      <div class="col-sm-2 col-md-2 col-lg-2">
+        <label>Prix Supplement</label>
+        <input type="number" [(ngModel)]="currentSupplement.prixSupplement"
+        name="prixSupplement" class="form-control" required />
+      </div>
+  
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="currentSupplement.email"
+        name="email" class="form-control" required email />
+        <div *ngIf="updateSupplementForm.submitted && !updateSupplementForm.form.controls['email']?.valid" class="text-danger">
+          Veuillez entrer un email valide.
+        </div>
+        <div *ngIf="emailInvalid()" class="text-danger">
+          L'email doit contenir '&#64;' et '.com'.
+        </div>
+      </div>
+  
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <label>Date création</label>
+        <input type="date" [ngModel]="currentSupplement.dateCreation | date: 'yyyy-MM-dd'"
+        (ngModelChange)="currentSupplement.dateCreation = $event" name="dateCreation"
+        class="form-control" required />
+      </div>
+  
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <label>Catégorie</label>
+        <select class="form-control form-control-lg" id="idCat" name="idCat"
+        [(ngModel)]="updatedNutId">
+          <option *ngFor="let nut of nutritionals" [value]="nut.idNut">{{nut.nomNut}}</option>
+        </select>
+      </div>
+  
+      <div class="mt-2">
+        <button type="submit" class="btn btn-success">Modifier</button>
+      </div>
+  
+    </form>
+  </div>
+  
